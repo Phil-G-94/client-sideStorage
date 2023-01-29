@@ -58,6 +58,5 @@ and then retrieve it when needed. Allows us to:
     - (browser doesn't make the API available to scripts on the page) >> happens in private browsing mode?
     - [how to feature-detect localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#feature-detecting_localstorage).
 
-
-
 #### Web Storage Demo
+
