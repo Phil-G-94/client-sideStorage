@@ -1,3 +1,5 @@
+// Event listener on storage object that fires when the storage object associated with the current origin is changed;
+
 window.addEventListener('storage', (e) => {
   document.querySelector('.my-key').textContent = e.key;
   document.querySelector('.my-old').textContent = e.oldValue;
