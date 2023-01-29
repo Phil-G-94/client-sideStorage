@@ -41,4 +41,23 @@ and then retrieve it when needed. Allows us to:
 
 - Separate storage / data store for each domain loaded in the browser. 
 
-### Active Learning 
+### Active Learning: Web Storage API 
+
+- personal-greeting directory contains a simplistic use of .setItem() || .getItem() || .removeItem() methods of the Web Storage API. More information, and a more detailed guide available via [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#basic_concepts) reference page.
+
+  - Storage objects are simple key-value stores; similar to objects. can be accessed used dot/bracket notation, or using .setItem() || .getItem() || .removeItem() methods. 
+  
+  - It is recommended to use the Web Storage API methods (setItem, get Item, removeItem, key, length). There are known pitfalls in doing otherwise, documented [here](https://2ality.com/2012/01/objects-as-maps.html). 
+
+  - Two mechanisms in Web Storage; sessionStorage and localStorage (persists even when browser is closed). 
+
+  - Both are made available via Window.sessionStorage / Window.localStorage. invoking one of these creates its own instance of the Storage object. A different storage object is used for the sessionStorage and localStorage for each origin - they function and are controlled separately.
+
+  - Web Storage API is available in current versions of all major browsers. There are exceptions: 
+    - (older browsers) 
+    - (browser doesn't make the API available to scripts on the page) >> happens in private browsing mode?
+    - [how to feature-detect localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#feature-detecting_localstorage).
+
+
+
+#### Web Storage Demo
