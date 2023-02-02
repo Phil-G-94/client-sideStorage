@@ -60,3 +60,4 @@ and then retrieve it when needed. Allows us to:
 
 #### Web Storage Demo
 
+#### IndexedDB Demo
