@@ -61,3 +61,7 @@ and then retrieve it when needed. Allows us to:
 #### Web Storage Demo
 
 #### IndexedDB Demo
+
+#### Storing complex data using indexedDB 
+
+#### Offline asset storage 
