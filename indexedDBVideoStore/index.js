@@ -16,7 +16,7 @@ let db;
 // initialisation function
 function init() {
 
-  // for loop to iterate through array of video objects
+  // for loop to iterate through array of video objects provided above
   for (const video of videos) {
 
     // open transaction, grabbing a reference to the object store
@@ -31,7 +31,7 @@ function init() {
       if (request.result) {
         console.log('taking videos from indexedDB');
         // Grab the videos from IDB and display them using displayVideo()
-        displayVideo( request.result.mp4, request.result.webm, request.result.name);
+        displayVideo(request.result.mp4, request.result.webm, request.result.name);
       } else {
         // fetch the videos from the network
         fetchVideoFromNetwork(video);
@@ -49,7 +49,7 @@ function fetchVideoFromNetwork(video) {
 
   // fetch the MP4 and WebM versions of the video using the fetch() function,
   // then expose their response bodies as blobs
-  // !!ISSUE!! - currently returning undefined
+  
   const mp4Blob = fetch(`videos/${video.name}.mp4`).then(response => response.blob());
   const webmBlob = fetch(`videos/${video.name}.webm`).then(response => response.blob());
 
@@ -80,7 +80,7 @@ function storeVideo(mp4Blob, webmBlob, name) {
 
   request.addEventListener('success', () => console.log('Record addition attempt finished'));
   request.addEventListener('error', () => console.error(request.error));
-};
+}
 
 // Define the displayVideo() function
 
@@ -95,7 +95,7 @@ function displayVideo(mp4Blob, webmBlob, title) {
   const h2 = document.createElement('h2');
   h2.textContent = title;
 
-  const video = document.createElement('h2');
+  const video = document.createElement('video');
   video.controls = true;
 
   const source1 = document.createElement('source');
@@ -112,7 +112,7 @@ function displayVideo(mp4Blob, webmBlob, title) {
   article.appendChild(video);
   video.appendChild(source1);
   video.appendChild(source2);
-};
+}
 
 // Open database; it is created if it doesn't already exist
 
