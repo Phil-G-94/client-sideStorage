@@ -43,7 +43,7 @@ function init() {
 // define the fetchVideoFromNetwork() function
 
 function fetchVideoFromNetwork(video) {
-  // state that fetching operation has begin
+  // state that fetching operation has began
   console.log('fetching videos from network');
 
 
@@ -94,14 +94,11 @@ function displayVideo(mp4Blob, webmBlob, title) {
   const article = document.createElement('article');
   const h2 = document.createElement('h2');
   h2.textContent = title;
-
   const video = document.createElement('video');
   video.controls = true;
-
   const source1 = document.createElement('source');
   source1.src = mp4URL;
   source1.type = 'video/mp4';
-
   const source2 = document.createElement('source');
   source2.src = webmURL;
   source2.type = 'video/webm';
