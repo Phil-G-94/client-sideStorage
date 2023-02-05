@@ -48,15 +48,21 @@ function fetchVideoFromNetwork(video) {
 
 
   // fetch the MP4 and WebM versions of the video using the fetch() function,
-  // then expose their response bodies as blobs
+  // then expose their response bodies as blobs, giving us an object representation of the videos that can be
+  // stored and used later on in the code
   
   const mp4Blob = fetch(`videos/${video.name}.mp4`).then(response => response.blob());
   const webmBlob = fetch(`videos/${video.name}.webm`).then(response => response.blob());
 
+  // since the above requests are both asynchronous and we only want to store or display the videos once the promises are fullfilled, we
+  // use the Promise.all() built in method. Returns a promise that is fulfilled once all the individual promises are fulfilled. 
+  
   Promise.all([mp4Blob, webmBlob]).then(values => {
-    // display video fetched from the network with displayVideo()
+    // inside the .then() handler of, we call
+    // displayVideo() to display video fetched from the network and, 
     displayVideo(values[0], values[1], video.name);
-    // store it in IDB using storeVideo()
+
+    // call storeVideo() to store it to IDB
     storeVideo(values[0], values[1], video.name); 
   });
 }
@@ -64,10 +70,12 @@ function fetchVideoFromNetwork(video) {
 // define the storeVideo() function
 function storeVideo(mp4Blob, webmBlob, name) {
   
-  // Open transaction, get object store; make it a readwrite so we can write to the IDB
-  const objectStore = db.transaction(['videos_os'], 'readwrite').objectStore('videos_os');
+  // we open a 'readwrite' transaction and get a reference to our videos_os object store
+  const objectStore = db
+    .transaction(['videos_os'], 'readwrite')
+    .objectStore('videos_os');
 
-  // create a record to add to the IDB
+  // create an object representing the record to add it to the IDB
   const record = {
     mp4 : mp4Blob,
     webm : webmBlob, 
@@ -75,10 +83,11 @@ function storeVideo(mp4Blob, webmBlob, name) {
   };
 
   // add record to the IDB using .add() 
-  // !!ISSUE: currently reporting failed to execute add; evaluating the object store's key path yielded a value that is not a valid key  
   const request = objectStore.add(record);
 
+  // success msg statement if record added successfully
   request.addEventListener('success', () => console.log('Record addition attempt finished'));
+  // error msg statement if record wasn't added successfully
   request.addEventListener('error', () => console.error(request.error));
 }
 
